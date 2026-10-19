@@ -11,7 +11,7 @@ Pedro Inacio Monteiro Silva.
 
 **Nome do Projeto:** StudyMap
 
----
+
 
 # Visão Geral
 
