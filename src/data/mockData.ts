@@ -1,4 +1,11 @@
-import { StudySpace, Event } from "../types";
+import {
+  StudySpace,
+  Event,
+  UserAccount,
+  RoleVerificationToken,
+  MonitorDestinationSchedule,
+  SpaceNotice
+} from "../types";
 
 export const defaultSpaces: StudySpace[] = [
   {
@@ -10,7 +17,7 @@ export const defaultSpaces: StudySpace[] = [
     tipo: "Biblioteca",
     localizacao: "Bloco A — Térreo — Salão 1",
     capacidade: 50,
-    ocupacao: 18,
+    ocupacao: 2, // 2 alunos cadastrados com reserva ativa (Caua e Charles)
     descricao: "Espaço amplo destinado ao estudo individual e com foco total em concentração.",
     perfilAmbiente: "Silencioso",
     horarioFuncionamento: "07:30 às 22:00",
@@ -27,7 +34,7 @@ export const defaultSpaces: StudySpace[] = [
       "Luminárias de mesa",
       "Mesas amplas de estudo"
     ],
-    professorResponsavel: "Profa. Helena Santos",
+    professorResponsavel: "Prof. Helena Santos",
     horarioProfessor: "14:00 às 18:00",
     monitorDisponivel: true,
     nomeMonitor: "Lucas Andrade",
@@ -42,7 +49,7 @@ export const defaultSpaces: StudySpace[] = [
     tipo: "Laboratório",
     localizacao: "Bloco B — 2º andar — Sala 204",
     capacidade: 30,
-    ocupacao: 22,
+    ocupacao: 1, // 1 aluno cadastrado com reserva ativa (Emanuel)
     descricao: "Laboratório equipado com desktops modernos para desenvolvimento e estudos técnicos.",
     perfilAmbiente: "Moderado",
     horarioFuncionamento: "08:00 às 21:30",
@@ -73,8 +80,8 @@ export const defaultSpaces: StudySpace[] = [
     andar: "2º Andar",
     tipo: "Sala",
     localizacao: "Bloco B — 2º andar — Sala 203",
-    capacidade: 20,
-    ocupacao: 20, // Lotada propositalmente para demonstrar a Fila de Espera conforme o escopo!
+    capacidade: 2,
+    ocupacao: 2, // 2 alunos cadastrados com reserva ativa (Juliana e Thiago) - lotada para testes de fila de espera
     descricao: "Sala de estudos climatizada para grupos de alunos e debates acadêmicos.",
     perfilAmbiente: "Moderado",
     horarioFuncionamento: "08:00 às 22:00",
@@ -103,7 +110,7 @@ export const defaultSpaces: StudySpace[] = [
     tipo: "Sala de estudos",
     localizacao: "Bloco C — 1º andar — Sala 108",
     capacidade: 8,
-    ocupacao: 2,
+    ocupacao: 0,
     descricao: "Espaço com isolamento acústico dedicado à elaboração de trabalhos em equipe e apresentações.",
     perfilAmbiente: "Trabalho em Equipe",
     horarioFuncionamento: "07:30 às 22:00",
@@ -130,7 +137,7 @@ export const defaultSpaces: StudySpace[] = [
     tipo: "Auditório",
     localizacao: "Prédio Central — Térreo",
     capacidade: 120,
-    ocupacao: 15,
+    ocupacao: 1, // 1 aluno cadastrado com reserva ativa (Pedro)
     descricao: "Grande auditório projetado para palestras, seminários, workshops e defesas de TCC.",
     perfilAmbiente: "Moderado",
     horarioFuncionamento: "08:00 às 22:00",
@@ -161,7 +168,7 @@ export const defaultSpaces: StudySpace[] = [
     tipo: "Biblioteca",
     localizacao: "Bloco A — 2º andar — Sala 210",
     capacidade: 35,
-    ocupacao: 8,
+    ocupacao: 0,
     descricao: "Acervo especializado em tecnologia, física e matemática com cabines individuais de estudo.",
     perfilAmbiente: "Silencioso",
     horarioFuncionamento: "08:00 às 20:00",
@@ -204,3 +211,285 @@ export const defaultEvents: Event[] = [
     horarioFim: "21:30"
   }
 ];
+
+export const defaultUsers: UserAccount[] = [
+  // Alunos (Perfil padrão ao realizar cadastro)
+  {
+    id: 1,
+    nome: "Caua Henrique Pinto de Lima",
+    matricula: "20261001",
+    email: "caua.lima@studymap.edu.br",
+    senha: "Aluno@123",
+    perfil: "aluno",
+    criadoEm: "2026-09-28T08:00:00.000Z"
+  },
+  {
+    id: 2,
+    nome: "Charles Kaue Barbosa da Silva",
+    matricula: "20261002",
+    email: "charles.kaue@studymap.edu.br",
+    senha: "Aluno@123",
+    perfil: "aluno",
+    criadoEm: "2026-09-28T08:05:00.000Z"
+  },
+  {
+    id: 3,
+    nome: "Emanuel da Silva Correia",
+    matricula: "20261003",
+    email: "emanuel.correia@studymap.edu.br",
+    senha: "Aluno@123",
+    perfil: "aluno",
+    criadoEm: "2026-09-28T08:10:00.000Z"
+  },
+  {
+    id: 4,
+    nome: "Pedro Inacio Monteiro Silva",
+    matricula: "20261004",
+    email: "pedro.monteiro@studymap.edu.br",
+    senha: "Aluno@123",
+    perfil: "aluno",
+    criadoEm: "2026-09-28T08:15:00.000Z"
+  },
+  {
+    id: 5,
+    nome: "Maria Eduarda Oliveira",
+    matricula: "20261005",
+    email: "maria.eduarda@studymap.edu.br",
+    senha: "Aluno@123",
+    perfil: "aluno",
+    criadoEm: "2026-10-01T10:00:00.000Z"
+  },
+  {
+    id: 11,
+    nome: "Juliana Rocha",
+    matricula: "20261011",
+    email: "juliana.rocha@studymap.edu.br",
+    senha: "Aluno@123",
+    perfil: "aluno",
+    criadoEm: "2026-10-02T09:00:00.000Z"
+  },
+  {
+    id: 12,
+    nome: "Thiago Mendes",
+    matricula: "20261012",
+    email: "thiago.mendes@studymap.edu.br",
+    senha: "Aluno@123",
+    perfil: "aluno",
+    criadoEm: "2026-10-02T09:15:00.000Z"
+  },
+  {
+    id: 13,
+    nome: "João Pedro Silveira",
+    matricula: "20261013",
+    email: "joao.pedro@studymap.edu.br",
+    senha: "Aluno@123",
+    perfil: "aluno",
+    criadoEm: "2026-10-02T09:30:00.000Z"
+  },
+
+  // Monitores
+  {
+    id: 6,
+    nome: "Lucas Andrade",
+    matricula: "20262001",
+    token: "MON-2026-101",
+    email: "lucas.andrade@studymap.edu.br",
+    senha: "Monitor@123",
+    perfil: "monitor",
+    espacoMonitoriaId: 1,
+    espacoMonitoria: "Biblioteca Central — Salão Silencioso",
+    criadoEm: "2026-09-28T09:00:00.000Z"
+  },
+  {
+    id: 7,
+    nome: "João Silva",
+    matricula: "20262002",
+    token: "MON-2026-102",
+    email: "joao.silva@studymap.edu.br",
+    senha: "Monitor@123",
+    perfil: "monitor",
+    espacoMonitoriaId: 2,
+    espacoMonitoria: "Laboratório de Informática 2",
+    criadoEm: "2026-09-28T09:10:00.000Z"
+  },
+  {
+    id: 8,
+    nome: "Beatriz Lima",
+    matricula: "20262003",
+    token: "MON-2026-103",
+    email: "beatriz.lima@studymap.edu.br",
+    senha: "Monitor@123",
+    perfil: "monitor",
+    espacoMonitoriaId: 5,
+    espacoMonitoria: "Auditório Central",
+    criadoEm: "2026-09-28T09:20:00.000Z"
+  },
+
+  // Administradores
+  {
+    id: 9,
+    nome: "Coordenação Geral (Admin 1)",
+    matricula: "ADM-0001",
+    token: "ADM-2026-001",
+    email: "admin@studymap.edu.br",
+    senha: "Admin@123",
+    perfil: "admin",
+    criadoEm: "2026-09-28T07:30:00.000Z"
+  },
+  {
+    id: 10,
+    nome: "Profa. Helena Santos",
+    matricula: "ADM-0002",
+    token: "ADM-2026-002",
+    email: "helena.admin@studymap.edu.br",
+    senha: "Admin@123",
+    perfil: "admin",
+    criadoEm: "2026-09-28T07:45:00.000Z"
+  }
+];
+
+export const defaultRoleTokens: RoleVerificationToken[] = [
+  // Tokens livres disponibilizados pelo Admin 1 para elevar contas de Aluno para Monitor
+  {
+    codigo: "MON-2026-201",
+    perfilDestino: "monitor",
+    descricao: "Token de habilitação para novo Monitor (Plantão Biblioteca / Salas)",
+    criadoPor: "Coordenação Geral (Admin 1)"
+  },
+  {
+    codigo: "MON-2026-202",
+    perfilDestino: "monitor",
+    descricao: "Token de habilitação para novo Monitor (Plantão Laboratórios)",
+    criadoPor: "Coordenação Geral (Admin 1)"
+  },
+  {
+    codigo: "MON-2026-203",
+    perfilDestino: "monitor",
+    descricao: "Token de habilitação para novo Monitor (Plantão Geral)",
+    criadoPor: "Coordenação Geral (Admin 1)"
+  },
+
+  // Tokens livres disponibilizados pelo Admin 1 para elevar contas de Aluno para Administrador
+  {
+    codigo: "ADM-2026-201",
+    perfilDestino: "admin",
+    descricao: "Token de habilitação para novo Administrador Escolar",
+    criadoPor: "Coordenação Geral (Admin 1)"
+  },
+  {
+    codigo: "ADM-2026-202",
+    perfilDestino: "admin",
+    descricao: "Token de habilitação para Coordenação de Espaços",
+    criadoPor: "Coordenação Geral (Admin 1)"
+  },
+
+  // Tokens já vinculados aos monitores e administradores iniciais
+  {
+    codigo: "MON-2026-101",
+    perfilDestino: "monitor",
+    descricao: "Token vinculado a Lucas Andrade",
+    criadoPor: "Coordenação Geral (Admin 1)",
+    usadoPorEmail: "lucas.andrade@studymap.edu.br",
+    usadoEm: "2026-09-28T09:00:00.000Z"
+  },
+  {
+    codigo: "MON-2026-102",
+    perfilDestino: "monitor",
+    descricao: "Token vinculado a João Silva",
+    criadoPor: "Coordenação Geral (Admin 1)",
+    usadoPorEmail: "joao.silva@studymap.edu.br",
+    usadoEm: "2026-09-28T09:10:00.000Z"
+  },
+  {
+    codigo: "MON-2026-103",
+    perfilDestino: "monitor",
+    descricao: "Token vinculado a Beatriz Lima",
+    criadoPor: "Coordenação Geral (Admin 1)",
+    usadoPorEmail: "beatriz.lima@studymap.edu.br",
+    usadoEm: "2026-09-28T09:20:00.000Z"
+  },
+  {
+    codigo: "ADM-2026-001",
+    perfilDestino: "admin",
+    descricao: "Token vinculado à Coordenação Geral (Admin 1)",
+    criadoPor: "Sistema Institucional",
+    usadoPorEmail: "admin@studymap.edu.br",
+    usadoEm: "2026-09-28T07:30:00.000Z"
+  },
+  {
+    codigo: "ADM-2026-002",
+    perfilDestino: "admin",
+    descricao: "Token vinculado à Profa. Helena Santos",
+    criadoPor: "Coordenação Geral (Admin 1)",
+    usadoPorEmail: "helena.admin@studymap.edu.br",
+    usadoEm: "2026-09-28T07:45:00.000Z"
+  }
+];
+
+export const defaultMonitorSchedules: MonitorDestinationSchedule[] = [
+  {
+    id: 501,
+    monitorId: 6,
+    monitorNome: "Lucas Andrade",
+    monitorEmail: "lucas.andrade@studymap.edu.br",
+    espacoId: 1,
+    espacoNome: "Biblioteca Central — Salão Silencioso",
+    data: today,
+    horarioInicio: "09:00",
+    horarioFim: "17:00",
+    status: "agendado",
+    criadoEm: "2026-10-25T08:00:00.000Z"
+  },
+  {
+    id: 502,
+    monitorId: 7,
+    monitorNome: "João Silva",
+    monitorEmail: "joao.silva@studymap.edu.br",
+    espacoId: 2,
+    espacoNome: "Laboratório de Informática 2",
+    data: today,
+    horarioInicio: "13:00",
+    horarioFim: "18:00",
+    status: "agendado",
+    criadoEm: "2026-10-25T08:05:00.000Z"
+  },
+  {
+    id: 503,
+    monitorId: 8,
+    monitorNome: "Beatriz Lima",
+    monitorEmail: "beatriz.lima@studymap.edu.br",
+    espacoId: 5,
+    espacoNome: "Auditório Central",
+    data: today,
+    horarioInicio: "14:00",
+    horarioFim: "20:00",
+    status: "agendado",
+    criadoEm: "2026-10-25T08:10:00.000Z"
+  }
+];
+
+export const defaultSpaceNotices: SpaceNotice[] = [
+  {
+    id: 701,
+    espacoId: 1,
+    espacoNome: "Biblioteca Central — Salão Silencioso",
+    titulo: "Horário estendido para semana de provas",
+    mensagem: "As cabines de estudo contarão com tomadas extras revisadas e empréstimo local de luminárias.",
+    prioridade: "informativo",
+    autorNome: "Coordenação Geral (Admin 1)",
+    ativo: true,
+    criadoEm: "2026-10-25T09:00:00.000Z"
+  },
+  {
+    id: 702,
+    espacoId: 2,
+    espacoNome: "Laboratório de Informática 2",
+    titulo: "Preparação para Workshop vespertino",
+    mensagem: "Entre 14h e 16h haverá Workshop de Next.js; demais horários seguem livres para reservas individuais.",
+    prioridade: "atencao",
+    autorNome: "Profa. Helena Santos",
+    ativo: true,
+    criadoEm: "2026-10-25T09:30:00.000Z"
+  }
+];
+
